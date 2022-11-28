@@ -4,7 +4,7 @@ variable "shape" {
 }
 
 variable "ubuntu_image_id" {
-    default = "ocid1.image.oc1.iad.aaaaaaaaadek6nehyiziiixufneopli76szucyjo7rig5k6znv2pbc4kgloq"
+    default = "ocid1.image.oc1.iad.aaaaaaaak7rlfnzqnbndruinlivh2c6stfprd5rrbwojlsssht42rn62jd7a"
 }
 
 resource "oci_core_instance" "k8s_instance" {
