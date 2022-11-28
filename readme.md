@@ -58,3 +58,13 @@ bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:90
 # Docker
 
 You can run `docker-compose up -d` and the container will be running on localhost:8081, producer on localhost:8080
+
+# OCI
+
+There are terraforms files for provide oci infrastructure, there only should be updated the security list of the public subnet manually to allow traffic to 8080-8081 ports, and the instance should be configurated manually
+
+```
+cd terraform/
+terraform plan
+terraform apply
+```
