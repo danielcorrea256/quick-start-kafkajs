@@ -2,11 +2,11 @@ FROM node
 
 WORKDIR /app
 
-COPY ./producer/package.json /app
+COPY ./package.json /app/
 
 RUN npm install
 
-COPY ./producer/ /app
+COPY . /app/
 
 EXPOSE 8080
 

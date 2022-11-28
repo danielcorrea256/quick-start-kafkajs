@@ -26,12 +26,30 @@ services:
     ports:
       - 9092:9092
 
-  webapp:
-    image: webapp
-    build: 
-      dockerfile: ./webapp.Dockerfile
-      context: .
+  producer:
+    image: producer
+    build:
+      dockerfile: ./producer.Dockerfile
+      context: ./producer/
     ports:
       - 8080:8080
+    networks:
+      - modric
+    environment:
+      - BROKER=kafka:9092
+    depends_on:
+      - kafka
+
+  consumer:
+    image: consumer
+    build:
+      dockerfile: ./consumer.Dockerfile
+      context: ./consumer/
+    ports:
+      - 8081:8081
+    environment:
+      - BROKER=kafka:9092
+    depends_on:
+      - kafka
     networks:
       - modric

@@ -54,3 +54,7 @@ Now you should be looking this in the console
 ```
 bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092
 ```
+
+# Docker
+
+You can run `docker-compose up -d` and the container will be running on localhost:8081, producer on localhost:8080

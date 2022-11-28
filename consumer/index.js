@@ -1,6 +1,6 @@
 const http = require('http');
 const { Kafka } = require('kafkajs')
-const broker = process.env.broker || 'localhost:9092'
+const broker = process.env.BROKER || 'localhost:9092'
 
 const kafka = new Kafka({
     clientId: 'my-app',
