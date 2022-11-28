@@ -7,10 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="f()">Hello World</button>
+    <input type="text" id="input" value="">
+    <button onclick="f()">Send</button>
     <script>
+        let input = document.getElementById('input')
+
         function f() {
-            fetch("/kafka")
+            fetch(`/kafka?message=${input.value}`)
         }
     </script>
 </body>

@@ -2,20 +2,22 @@ const http = require('http');
 const fs = require('fs');
 const { Kafka } = require('kafkajs')
 
+const broker = process.env.broker || 'localhost:9092'
+
 const kafka = new Kafka({
     clientId: 'my-app',
-    brokers: ['localhost:9092'],
+    brokers: [broker],
  })
 
 const producer = kafka.producer()
  
 
-async function sendMessage() {
+async function sendMessage(message) {
     await producer.connect()
     await producer.send({
     topic: 'test-topic',
     messages: [
-        { value: 'Hello KafkaJS user!' },
+        { value: message },
     ],
     })
     
@@ -27,9 +29,11 @@ fs.readFile('./index.html', function (err, html) {
         throw err; 
     }       
     http.createServer(function(req, res) {  
-        if(req.url === '/kafka'){
+        let reqUrl = new URL("http://whatever.com" + req.url)
+        console.log(req.url)
+        if(req.url.substring(0, 6) === '/kafka'){
             res.writeHead(200);
-            sendMessage()
+            sendMessage(reqUrl.searchParams.get('message'))
             res.end('kafka');
             console.log("Message sended.")
         } else {
