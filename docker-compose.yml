@@ -1,0 +1,37 @@
+version: '3.0'
+
+networks:
+  modric:
+    driver: bridge
+
+services:
+  zookeeper:
+    image: 'zookeeper'
+    hostname: zoo
+    ports:
+      - 2181:2181
+    networks:
+      - modric
+    
+  kafka:
+    depends_on:
+      - zookeeper
+    image: 'ubuntu/kafka'
+    hostname: kafka
+    networks:
+      - modric
+    environment:
+      - ZOOKEEPER_HOST=zoo
+      - ZOOKEEPER_PORT=2181
+    ports:
+      - 9092:9092
+
+  webapp:
+    image: webapp
+    build: 
+      dockerfile: ./webapp.Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    networks:
+      - modric

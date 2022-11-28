@@ -20,7 +20,7 @@ async function run() {
     
     
     await consumer.connect()
-    await consumer.subscribe({ topic: 'test-topic', fromBeginning: true })
+    await consumer.subscribe({ topic: 'test-topic', fromBeginning: false })
     
     await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
@@ -32,3 +32,32 @@ async function run() {
 }
 
 run().catch(console.error)
+console.log("ok")
+
+async function xd() {
+    for (let i = 0; i < 10; i++) {
+        await producer.connect()
+        await producer.send({
+            topic: 'test-topic',
+            key: "partido argentina",
+            messages: [
+                { value: `Argentina: ${i} Mexico: 0`}
+            ]
+        })
+        await producer.disconnect()
+        await producer.connect()
+        
+        await producer.send({
+            topic: 'test-topic',
+            key: "partido spain",
+            messages: [
+                { value: `spain: ${i} germany: 0`}
+            ]
+        })
+
+        await producer.disconnect()
+    }
+
+} 
+
+xd()
