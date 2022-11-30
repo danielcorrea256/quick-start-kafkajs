@@ -29,11 +29,13 @@ kind: Service
 metadata:
   name: producer
 spec:
+  type: NodePort
   selector:
     app: producer
   ports:
   - port: 8080
     targetPort: 8080
+    nodePort: 30001
 
 ---
 
@@ -42,8 +44,10 @@ kind: Service
 metadata:
   name: consumer
 spec:
+  type: NodePort
   selector:
     app: consumer
   ports:
   - port: 8081
     targetPort: 8081
+    nodePort: 30000

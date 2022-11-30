@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: 
+kind: Deployment
 metadata:
   name: zookeeper
 spec:
@@ -15,10 +15,6 @@ spec:
       containers:
       - name: myapp
         image: zookeeper
-        resources:
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
         ports:
         - containerPort: 2181
         env:
@@ -43,10 +39,6 @@ spec:
       containers:
       - name: kafka
         image: ubuntu/kafka
-        resources:
-          limits:
-            memory: "Gi"
-            cpu: "500m"
         ports:
         - containerPort: 9092
         env:
@@ -73,10 +65,6 @@ spec:
       containers:
       - name: producer
         image: daniel512/kafka-producer
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
         env:
@@ -101,10 +89,6 @@ spec:
       containers:
       - name: consumer
         image: daniel512/kafka-consumer
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8081
         env:
