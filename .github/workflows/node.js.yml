@@ -28,8 +28,10 @@ jobs:
         cache: 'npm'
     - run: cd producer
     - run: npm build
-    - run: cd ../consumer
+    - run: cd ..
+    - run: cd consumer
     - run: npm build
-    - run: npm test
-    - run: cd ../producer
-    - run: npm test
+    - run: npm run test
+    - run: cd ..
+    - run: cd producer
+    - run: npm run test
