@@ -26,13 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd producer
-    - run: npm install
-    - run: cd ..
-    - run: cd consumer
-    - run: npm install
-    - run: pwd
-    - run: npm run test
-    - run: cd ..
-    - run: cd producer
-    - run: npm run test
+    - run: npm --prefix ./consumer install ./consumer
+    - run: npm --prefix ./producer install ./producer
+    - run: npm --prefix ./consumer run test
+    - run: npm --prefix ./producer run test
