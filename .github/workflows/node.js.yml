@@ -31,6 +31,7 @@ jobs:
     - run: cd ..
     - run: cd consumer
     - run: npm install
+    - run: pwd
     - run: npm run test
     - run: cd ..
     - run: cd producer
