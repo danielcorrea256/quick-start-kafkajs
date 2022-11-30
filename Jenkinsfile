@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('pwd') {
+      steps {
+        sh 'sh \'pwd\''
+      }
+    }
+
   }
 }
