@@ -9,7 +9,8 @@ pipeline {
 
     stage('pwd') {
       steps {
-        sh 'pwd'
+        sh '''#!/bin/bash
+pwd'''
       }
     }
 
