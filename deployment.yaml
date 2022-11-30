@@ -11,7 +11,7 @@ spec:
       labels:
         app: zookeeper
     spec:
-      hostname: zoo
+      hostname: zookeeper
       containers:
       - name: myapp
         image: zookeeper
@@ -36,6 +36,7 @@ spec:
       labels:
         app: kafka
     spec:
+      hostname: kafka
       containers:
       - name: kafka
         image: ubuntu/kafka
