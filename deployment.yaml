@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+spec:
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      hostname: zoo
+      containers:
+      - name: myapp
+        image: zookeeper
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 2181
+        env:
+        - name: ZOO_MY_ID
+          value: "\x31"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+spec:
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: ubuntu/kafka
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9092
+        env:
+        - name: ZOOKEEPER_HOST
+          value: zookeeper
+        - name: ZOOKEEPER_PORT
+          value: "\x32\x31\x38\x31"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+spec:
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+      - name: producer
+        image: daniel512/kafka-producer
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BROKER
+          value: "kafka:9092"
+    
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: daniel512/kafka-consumer
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081
+        env:
+        - name: BROKER
+          value: "kafka:9092"
+  
