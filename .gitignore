@@ -4,3 +4,4 @@ terraform/terraform.tfvars
 *.backup
 terraform/.terraform
 terraform/.terraform.lock.hcl
+*.log

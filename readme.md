@@ -68,3 +68,11 @@ cd terraform/
 terraform plan
 terraform apply
 ```
+
+# K8S
+
+The files `service.yaml` & `deployment.yaml` are files for kubernetes, to create deployments you should apply both files
+```
+kubectl apply -f ./deployment.yaml
+kubectl apply -f ./service.yaml
+```
