@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "index.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "kafkajs": "^2.2.3"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
