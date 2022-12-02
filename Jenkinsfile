@@ -7,10 +7,13 @@ pipeline {
       }
     }
 
-    stage('pwd') {
+    stage('npm') {
       steps {
         sh '''#!/bin/bash
-pwd'''
+npm --prefix ./consumer install ./consumer
+npm --prefix ./producer install ./producer
+npm --prefix ./consumer run test
+npm --prefix ./producer run test'''
       }
     }
 
