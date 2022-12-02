@@ -17,5 +17,12 @@ npm --prefix ./producer run test'''
       }
     }
 
+    stage('docker build') {
+      steps {
+        sh '''#!/bin/bash
+docker-compose build'''
+      }
+    }
+
   }
 }
